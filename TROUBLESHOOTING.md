@@ -47,7 +47,23 @@
 2. Use async operations where possible
 3. Implement proper error handling
 
-### 4. CORS Issues
+### 4. Function Runtime Version Error
+
+**Symptoms:** `Function Runtimes must have a valid version, for example 'now-php@1.0.0'`
+**Causes:**
+
+- Incorrect runtime specification in vercel.json
+- Using deprecated runtime format
+- Vercel expecting versioned runtime specification
+
+**Solutions:**
+
+1. Use modern `rewrites` instead of `functions` in vercel.json
+2. Let Vercel auto-detect Python runtime
+3. Use minimal configuration without explicit runtime
+4. Add runtime.txt file for Python version specification
+
+### 5. CORS Issues
 
 **Symptoms:** Browser console shows CORS errors
 **Causes:**

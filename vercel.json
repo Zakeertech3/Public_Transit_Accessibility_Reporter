@@ -1,46 +1,16 @@
 {
-  "version": 2,
-  "functions": {
-    "api/*.py": {
-      "runtime": "python3.9"
-    }
-  },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/health",
-      "dest": "/api/health.py"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     },
     {
-      "src": "/api/reports",
-      "dest": "/api/reports.py"
+      "source": "/health",
+      "destination": "/api/health"
     },
     {
-      "src": "/api/test",
-      "dest": "/api/test.py"
-    },
-    {
-      "src": "/health",
-      "dest": "/api/health.py"
-    },
-    {
-      "src": "/",
-      "dest": "/frontend/index.html"
-    },
-    {
-      "src": "/index.html",
-      "dest": "/frontend/index.html"
-    },
-    {
-      "src": "/map.html",
-      "dest": "/frontend/map.html"
-    },
-    {
-      "src": "/reports.html",
-      "dest": "/frontend/reports.html"
-    },
-    {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg))",
-      "dest": "/frontend/$1"
+      "source": "/(.*)",
+      "destination": "/frontend/$1"
     }
   ]
 }
