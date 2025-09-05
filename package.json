@@ -4,8 +4,8 @@
   "description": "A crowdsourced platform for reporting public transit accessibility issues",
   "main": "frontend/index.html",
   "scripts": {
+    "build": "echo 'Frontend build complete'",
     "dev": "python -m http.server 8080 --directory frontend",
-    "build": "echo 'Static site - no build needed'",
     "start": "python -m http.server 8080 --directory frontend"
   },
   "keywords": [
