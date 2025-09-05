@@ -20,7 +20,7 @@ app.add_middleware(
         "*"  # Allow all origins for local development
     ],
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "DELETE"],
     allow_headers=["*"],
 )
 
@@ -118,3 +118,20 @@ async def create_report(report: ReportCreate):
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to create report: {str(e)}")
+
+@app.delete("/api/reports/{report_id}", status_code=204)
+async def delete_report(report_id: int):
+    """Delete a report by its ID."""
+    try:
+        with get_db_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM reports WHERE id = ?", (report_id,))
+            conn.commit()
+        
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Report not found")
+        
+        return
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete report: {str(e)}")
