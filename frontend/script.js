@@ -75,10 +75,11 @@ const Utils = {
 const API_CONFIG = {
     baseUrl: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
         ? 'http://localhost:8000' 
-        : '', // Use relative URLs for production (Vercel proxy)
+        : '', // Use localStorage for Vercel demo
     endpoints: {
         reports: '/api/reports'
-    }
+    },
+    useLocalStorage: window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
 };
 
 // Report Form Functionality

@@ -1,34 +1,45 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/index.py",
-      "use": "@vercel/python"
+  "functions": {
+    "api/*.py": {
+      "runtime": "python3.9"
     }
-  ],
+  },
   "routes": [
     {
-      "src": "/(.*\\.(html|css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
-      "dest": "/frontend/$1"
+      "src": "/api/health",
+      "dest": "/api/health.py"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.py"
+      "src": "/api/reports",
+      "dest": "/api/reports.py"
+    },
+    {
+      "src": "/api/test",
+      "dest": "/api/test.py"
     },
     {
       "src": "/health",
-      "dest": "/api/index.py"
+      "dest": "/api/health.py"
     },
     {
-      "src": "/docs",
-      "dest": "/api/index.py"
+      "src": "/",
+      "dest": "/frontend/index.html"
     },
     {
-      "src": "/openapi.json",
-      "dest": "/api/index.py"
+      "src": "/index.html",
+      "dest": "/frontend/index.html"
     },
     {
-      "src": "/(.*)",
+      "src": "/map.html",
+      "dest": "/frontend/map.html"
+    },
+    {
+      "src": "/reports.html",
+      "dest": "/frontend/reports.html"
+    },
+    {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg))",
       "dest": "/frontend/$1"
     }
   ]

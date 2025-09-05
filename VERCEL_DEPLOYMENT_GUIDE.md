@@ -44,6 +44,7 @@ git push -u origin main
 2. **Click "New Project"**
 3. **Import your repository** from the list
 4. **Configure the project**:
+
    - **Framework Preset**: Other
    - **Root Directory**: Leave empty (use root)
    - **Build Command**: Leave empty
@@ -90,6 +91,7 @@ Once deployed, you can:
 **Note**: SQLite doesn't work on Vercel serverless functions. For production, you'll need:
 
 1. **Use Vercel Postgres** (recommended):
+
    ```bash
    # In Vercel dashboard, add Postgres database
    # Update connection string in environment variables
@@ -117,6 +119,7 @@ git push
 ## 🌐 Example URLs
 
 After deployment, your app will be available at:
+
 - **Main App**: `https://your-app-name.vercel.app`
 - **Report Form**: `https://your-app-name.vercel.app/index.html`
 - **Map View**: `https://your-app-name.vercel.app/map.html`
@@ -126,6 +129,7 @@ After deployment, your app will be available at:
 ## 📱 Mobile Features
 
 Your deployed app will have:
+
 - ✅ **Responsive design** - Works on all screen sizes
 - ✅ **GPS location** - Access device location
 - ✅ **Camera access** - Take photos for reports
@@ -136,6 +140,7 @@ Your deployed app will have:
 ## 🔄 Continuous Deployment
 
 Once set up:
+
 1. **Make changes** to your code locally
 2. **Push to GitHub**: `git push`
 3. **Vercel auto-deploys** - No manual steps needed!
