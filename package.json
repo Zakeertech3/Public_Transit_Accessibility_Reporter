@@ -16,6 +16,9 @@
   ],
   "author": "",
   "license": "MIT",
+  "engines": {
+    "node": "18.x"
+  },
   "devDependencies": {},
   "dependencies": {}
 }
