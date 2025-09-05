@@ -1,8 +1,14 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from database import init_db, get_db_connection, validate_photo_size
 from models import ReportCreate, ReportResponse
 from datetime import datetime
+import os
+
+# Use different database based on environment
+if os.getenv('VERCEL'):
+    from database_vercel import init_db, get_db_connection, validate_photo_size
+else:
+    from database import init_db, get_db_connection, validate_photo_size
 
 app = FastAPI(title="Transit Accessibility Reporter API")
 
