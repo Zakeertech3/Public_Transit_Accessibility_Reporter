@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connection Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Connection Test</h1>
+    <p>This page will test if your frontend can connect to the backend API.</p>
+    
+    <button onclick="testBackendHealth()">Test Backend Health</button>
+    <button onclick="testGetReports()">Test Get Reports</button>
+    <button onclick="testSubmitReport()">Test Submit Report</button>
+    
+    <div id="results"></div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000';
+        const resultsDiv = document.getElementById('results');
+
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test ${type}`;
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            resultsDiv.appendChild(div);
+        }
+
+        async function testBackendHealth() {
+            addResult('Testing backend health endpoint...', 'info');
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                if (response.ok) {
+                    const data = await response.json();
+                    addResult(`✅ Backend health check passed: ${JSON.stringify(data)}`, 'success');
+                } else {
+                    addResult(`❌ Backend health check failed: ${response.status} ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Backend connection failed: ${error.message}`, 'error');
+                addResult(`💡 Make sure backend server is running on port 8000`, 'info');
+            }
+        }
+
+        async function testGetReports() {
+            addResult('Testing get reports endpoint...', 'info');
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/reports`);
+                if (response.ok) {
+                    const data = await response.json();
+                    addResult(`✅ Get reports successful: Found ${data.length} reports`, 'success');
+                } else {
+                    addResult(`❌ Get reports failed: ${response.status} ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Get reports connection failed: ${error.message}`, 'error');
+            }
+        }
+
+        async function testSubmitReport() {
+            addResult('Testing submit report endpoint...', 'info');
+            const testReport = {
+                latitude: 40.7128,
+                longitude: -74.0060,
+                category: "Other",
+                description: "Test report from connection test"
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/reports`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testReport)
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    addResult(`✅ Submit report successful: ${JSON.stringify(data)}`, 'success');
+                } else {
+                    const errorText = await response.text();
+                    addResult(`❌ Submit report failed: ${response.status} ${response.statusText} - ${errorText}`, 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Submit report connection failed: ${error.message}`, 'error');
+            }
+        }
+
+        // Auto-run health check on page load
+        window.onload = function() {
+            addResult('🚀 Connection test page loaded', 'info');
+            addResult('Click the buttons above to test different endpoints', 'info');
+            setTimeout(testBackendHealth, 1000);
+        };
+    </script>
+</body>
+</html>

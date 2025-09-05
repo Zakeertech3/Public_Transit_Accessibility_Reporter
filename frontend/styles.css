@@ -1,0 +1,1437 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Container and layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.main-content {
+    padding-top: 80px; /* Account for fixed navbar */
+    min-height: calc(100vh - 80px);
+}
+
+/* Navigation */
+.navbar {
+    background-color: #ffffff;
+    color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.nav-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #64748b;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: #2563eb;
+    color: white;
+}
+
+/* Mobile hamburger menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Content styling */
+h2 {
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: #64748b;
+    font-size: 1rem;
+}
+
+/* Placeholder content */
+.form-placeholder,
+.map-placeholder,
+.reports-placeholder {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    text-align: center;
+    color: #64748b;
+    margin-top: 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+/* Map container */
+.map-container {
+    height: 500px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+/* Refresh button */
+.refresh-btn {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.refresh-btn:hover {
+    background-color: #059669;
+}
+
+/* Map legend */
+.map-legend {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-top: 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+.map-legend h3 {
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.legend-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.legend-marker.elevator {
+    background-color: #e74c3c; /* Red for elevator issues */
+}
+
+.legend-marker.ramp {
+    background-color: #f39c12; /* Orange for ramp issues */
+}
+
+.legend-marker.vehicle {
+    background-color: #f1c40f; /* Yellow for vehicle issues */
+}
+
+.legend-marker.audio {
+    background-color: #3498db; /* Blue for audio issues */
+}
+
+.legend-marker.other {
+    background-color: #95a5a6; /* Gray for other issues */
+}
+
+/* Custom Leaflet popup styles */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background-color: white;
+}
+
+.leaflet-popup-content {
+    margin: 12px 16px;
+    line-height: 1.4;
+    font-size: 13px;
+    min-width: 200px;
+}
+
+.popup-content h4 {
+    color: #1e293b;
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.popup-content .popup-category {
+    background-color: #2563eb;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.popup-content .popup-description {
+    color: #555;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.popup-content .popup-timestamp {
+    color: #7f8c8d;
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+.popup-content .popup-location {
+    color: #718096;
+    font-size: 12px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.popup-content .popup-photo {
+    margin-top: 8px;
+}
+
+.popup-content .popup-photo img {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Form elements (basic styling for future forms) */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    background-color: white;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+}
+
+button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 60px;
+        flex-direction: column;
+        background-color: #2c3e50;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+        padding: 2rem 0;
+        gap: 0;
+        z-index: 1001; /* Ensure menu appears above map */
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 1rem 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-title {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .map-container {
+        height: 400px;
+        /* Improve touch interaction on mobile */
+        touch-action: pan-x pan-y;
+    }
+
+    .legend-items {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .legend-item {
+        font-size: 0.8rem;
+    }
+
+    /* Touch-friendly form elements */
+    input,
+    select,
+    textarea,
+    button {
+        font-size: 16px; /* Prevents zoom on iOS */
+        min-height: 44px; /* iOS touch target size */
+        -webkit-appearance: none; /* Remove iOS styling */
+        border-radius: 4px; /* Consistent border radius */
+    }
+
+    /* Improve select dropdown on mobile */
+    select {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 16px;
+        padding-right: 40px;
+    }
+
+    /* Improve textarea on mobile */
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    /* Better button spacing on mobile */
+    button {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Improve photo preview on mobile */
+    .photo-preview img {
+        max-width: 100%;
+        height: auto;
+        max-height: 250px;
+    }
+
+    /* Better status message visibility on mobile */
+    .status-message {
+        position: relative;
+        z-index: 10;
+        margin-top: 1rem;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    /* Improve map legend on mobile */
+    .map-legend {
+        margin-top: 1rem;
+        padding: 1rem;
+    }
+
+    .legend-items {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    /* Better popup styling on mobile */
+    .leaflet-popup-content {
+        font-size: 14px;
+        line-height: 1.4;
+        min-width: 200px;
+        max-width: 280px;
+    }
+
+    .popup-content .popup-photo img {
+        max-height: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main-content {
+        padding-top: 70px;
+    }
+
+    .nav-container {
+        height: 50px;
+    }
+
+    .nav-menu {
+        top: 50px;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    .form-placeholder,
+    .map-placeholder,
+    .reports-placeholder {
+        padding: 1.5rem;
+    }
+
+    .map-container {
+        height: 350px; /* Slightly taller for better mobile experience */
+        margin-bottom: 1rem;
+    }
+
+    .map-legend {
+        padding: 0.75rem;
+    }
+
+    .legend-items {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+        gap: 0.5rem;
+    }
+
+    .leaflet-popup-content {
+        min-width: 180px;
+        max-width: 250px;
+        font-size: 13px;
+    }
+
+    .popup-content .popup-photo img {
+        max-height: 100px;
+    }
+
+    /* Smaller form elements on very small screens */
+    input,
+    select,
+    textarea,
+    button {
+        font-size: 16px;
+        min-height: 40px;
+    }
+
+    /* Compact form sections */
+    .form-section {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+    }
+
+    .form-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    /* Better button layout on small screens */
+    .location-btn,
+    .photo-btn {
+        font-size: 14px;
+        padding: 0.6rem 1rem;
+    }
+
+    /* Improve character counter visibility */
+    .char-counter {
+        font-size: 12px;
+        margin-top: 0.25rem;
+    }
+
+    /* Better manual location inputs */
+    .manual-location {
+        padding: 0.75rem;
+    }
+
+    .manual-location .form-group {
+        margin-bottom: 0.75rem;
+    }
+
+    /* Improve status messages on small screens */
+    .location-status {
+        font-size: 13px;
+        padding: 0.4rem;
+    }
+}
+
+/* Report Form Styles */
+.report-form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-top: 1rem;
+    max-width: 600px;
+    border: 1px solid #e2e8f0;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.form-section h3 {
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Location Controls */
+.location-controls {
+    margin-bottom: 1.5rem;
+}
+
+.location-btn {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.location-btn:hover {
+    background-color: #059669;
+}
+
+.location-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.location-status {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.location-status.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.location-status.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.location-status.loading {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.manual-location {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+.toggle-btn {
+    background-color: #64748b;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.toggle-btn:hover {
+    background-color: #475569;
+}
+
+/* Photo Controls */
+.photo-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.photo-btn {
+    background-color: #f59e0b;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: flex-start;
+}
+
+.photo-btn:hover {
+    background-color: #d97706;
+}
+
+.photo-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.photo-preview {
+    margin-top: 1rem;
+}
+
+.photo-preview img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.photo-preview .remove-photo {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.photo-preview .remove-photo:hover {
+    background-color: #c0392b;
+}
+
+/* Character Counter */
+.char-counter {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.char-counter.warning {
+    color: #e67e22;
+}
+
+.char-counter.error {
+    color: #e74c3c;
+}
+
+/* Custom Category Input */
+#customCategoryGroup {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #3498db;
+}
+
+#customCategoryGroup label {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+#customCategory {
+    background-color: white;
+    border: 2px solid #3498db;
+}
+
+#customCategory:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Submit Button */
+.submit-btn {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #1d4ed8;
+}
+
+.submit-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+/* Status Messages */
+.status-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    display: none;
+}
+
+.status-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.status-message.loading {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Mobile Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .report-form {
+        padding: 1.5rem;
+        margin: 1rem 0;
+        border-radius: 8px;
+    }
+    
+    .location-btn,
+    .photo-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 15px;
+        padding: 0.8rem 1rem;
+        /* Better touch targets */
+        min-height: 48px;
+        touch-action: manipulation;
+    }
+    
+    .photo-controls {
+        align-items: stretch;
+    }
+
+    /* Improve form group spacing on mobile */
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+        font-size: 15px;
+        margin-bottom: 0.6rem;
+    }
+
+    /* Better mobile keyboard support */
+    input[type="number"] {
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Improve photo preview on mobile */
+    .photo-preview {
+        text-align: center;
+    }
+
+    .photo-preview img {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .remove-photo {
+        margin-top: 0.75rem;
+        font-size: 14px;
+        padding: 0.4rem 0.8rem;
+        min-height: 36px;
+    }
+
+    /* Better submit button on mobile */
+    .submit-btn {
+        font-size: 16px;
+        padding: 1rem;
+        min-height: 52px;
+        font-weight: 600;
+        border-radius: 8px;
+        touch-action: manipulation;
+    }
+
+    /* Improve toggle button */
+    .toggle-btn {
+        font-size: 14px;
+        padding: 0.6rem 1rem;
+        min-height: 40px;
+        touch-action: manipulation;
+    }
+}
+
+/* Reports List Styles */
+.reports-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-top: 1rem;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+.reports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+}
+
+.reports-count {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 1.1rem;
+}
+
+.reports-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.report-item {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    position: relative;
+}
+
+.report-item:hover {
+    background-color: #f8fafc;
+}
+
+.report-item:last-child {
+    border-bottom: none;
+}
+
+.report-item.expanded {
+    background-color: #f8f9fa;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.report-category {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.report-category.elevator {
+    background-color: #fadbd8;
+    color: #a93226;
+}
+
+.report-category.ramp {
+    background-color: #fdeaa7;
+    color: #b7950b;
+}
+
+.report-category.vehicle {
+    background-color: #fcf3cf;
+    color: #b7950b;
+}
+
+.report-category.audio {
+    background-color: #d6eaf8;
+    color: #1b4f72;
+}
+
+.report-category.other {
+    background-color: #eaeded;
+    color: #566573;
+}
+
+.report-timestamp {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.report-location {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.report-location::before {
+    content: "📍";
+    font-size: 0.8rem;
+}
+
+.report-description {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+}
+
+.report-details {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.report-details.expanded {
+    display: block;
+}
+
+.report-photo {
+    margin-top: 1rem;
+}
+
+.report-photo img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.expand-indicator {
+    color: #bdc3c7;
+    font-size: 0.8rem;
+    margin-left: auto;
+    transition: transform 0.2s ease;
+}
+
+.report-item.expanded .expand-indicator {
+    transform: rotate(180deg);
+}
+
+/* Empty State */
+.empty-state {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.empty-state-content h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.empty-state-content p {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.cta-btn {
+    background-color: #27ae60;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.cta-btn:hover {
+    background-color: #229954;
+}
+
+/* Loading and Error States */
+.loading-state,
+.error-state {
+    padding: 2rem;
+    text-align: center;
+    color: #666;
+}
+
+.error-state {
+    color: #e74c3c;
+}
+
+.retry-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.retry-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .reports-header {
+        padding: 1rem 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .reports-count {
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    .refresh-btn {
+        width: 100%;
+        min-height: 44px;
+        font-size: 15px;
+        touch-action: manipulation;
+    }
+
+    .report-item {
+        padding: 1rem 1.5rem;
+        /* Better touch targets */
+        min-height: 60px;
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+
+    .report-item:active {
+        background-color: #f0f0f0;
+    }
+
+    .report-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .report-category {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.7rem;
+    }
+
+    .report-timestamp {
+        font-size: 0.8rem;
+        color: #888;
+    }
+
+    .report-location {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .report-description {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .expand-indicator {
+        font-size: 0.9rem;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+
+    .report-details {
+        padding-top: 0.75rem;
+        margin-top: 0.75rem;
+    }
+
+    .report-photo img {
+        max-height: 180px;
+        border-radius: 6px;
+    }
+
+    .empty-state {
+        padding: 2rem 1rem;
+    }
+
+    .empty-state-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .empty-state-content p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .cta-btn {
+        font-size: 15px;
+        padding: 0.8rem 1.5rem;
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+
+    /* Better loading and error states on mobile */
+    .loading-state,
+    .error-state {
+        padding: 1.5rem;
+        font-size: 15px;
+    }
+
+    .retry-btn {
+        font-size: 15px;
+        padding: 0.7rem 1.2rem;
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .reports-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .reports-count {
+        font-size: 0.95rem;
+    }
+
+    .refresh-btn {
+        font-size: 14px;
+        padding: 0.7rem;
+        min-height: 42px;
+    }
+
+    .report-item {
+        padding: 0.75rem 1rem;
+        position: relative;
+    }
+
+    .report-category {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.6rem;
+    }
+
+    .report-timestamp {
+        font-size: 0.75rem;
+    }
+
+    .report-location {
+        font-size: 0.8rem;
+    }
+
+    .report-description {
+        font-size: 0.85rem;
+    }
+
+    .expand-indicator {
+        font-size: 0.8rem;
+        right: 0.75rem;
+        top: 0.75rem;
+    }
+
+    .report-details {
+        font-size: 0.85rem;
+    }
+
+    .report-photo img {
+        max-height: 150px;
+    }
+
+    .empty-state {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .empty-state-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .empty-state-content p {
+        font-size: 0.95rem;
+    }
+
+    .cta-btn {
+        font-size: 14px;
+        padding: 0.7rem 1.2rem;
+        min-height: 42px;
+    }
+}
+
+/* Mobile-specific optimizations */
+@media screen and (max-width: 768px) {
+    /* Prevent zoom on input focus for iOS */
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+        font-size: 16px !important;
+        transform: translateZ(0); /* Force hardware acceleration */
+    }
+
+    /* Better mobile keyboard handling */
+    .form-section:focus-within {
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Improve mobile scrolling */
+    body {
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+
+    /* Better touch targets */
+    .nav-link,
+    .location-btn,
+    .photo-btn,
+    .submit-btn,
+    .refresh-btn,
+    .cta-btn,
+    .retry-btn,
+    .toggle-btn,
+    .remove-photo {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Improve map interaction on mobile */
+    .leaflet-container {
+        -webkit-tap-highlight-color: transparent;
+        tap-highlight-color: transparent;
+    }
+
+    /* Better mobile popup positioning */
+    .leaflet-popup {
+        margin-bottom: 20px;
+    }
+
+    /* Improve mobile form validation */
+    input:invalid {
+        border-color: #e74c3c;
+        box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+    }
+
+    input:valid {
+        border-color: #27ae60;
+    }
+}
+
+/* Tablet-specific optimizations */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .map-container {
+        height: 450px;
+    }
+
+    .legend-items {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .report-form {
+        max-width: 100%;
+        padding: 2rem;
+    }
+
+    .form-section {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Desktop hover states (only on non-touch devices) */
+@media (hover: hover) and (pointer: fine) {
+    .report-item:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: all 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .location-btn:hover,
+    .photo-btn:hover,
+    .submit-btn:hover:not(:disabled),
+    .refresh-btn:hover,
+    .cta-btn:hover,
+    .retry-btn:hover,
+    .toggle-btn:hover {
+        transform: translateY(-1px);
+        transition: all 0.2s ease;
+    }
+}
+
+/* Utility classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+.hidden {
+    display: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Performance optimizations */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
