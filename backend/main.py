@@ -1,14 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from models import ReportCreate, ReportResponse
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
-# Use different database based on environment
-if os.getenv('VERCEL'):
-    from database_vercel import init_db, get_db_connection, validate_photo_size
-else:
-    from database import init_db, get_db_connection, validate_photo_size
+from database import init_db, get_db_connection, validate_photo_size
 
 app = FastAPI(title="Transit Accessibility Reporter API")
 
@@ -20,9 +16,8 @@ app.add_middleware(
         "http://localhost:5173", 
         "http://127.0.0.1:3000",
         "http://127.0.0.1:5173",
-        "https://*.vercel.app",  # Allow all Vercel subdomains
         "http://localhost:8080",  # For local frontend testing
-        "*"  # Fallback for development
+        "*"  # Allow all origins for local development
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST"],
@@ -61,15 +56,19 @@ async def get_reports():
             # Format timestamp for display (ISO format for frontend parsing)
             timestamp_str = row['timestamp']
             if timestamp_str:
-                # Parse the SQLite timestamp and format it consistently
                 try:
-                    dt = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
-                    formatted_timestamp = dt.isoformat()
-                except:
-                    # Fallback to original timestamp if parsing fails
-                    formatted_timestamp = timestamp_str
+                    # SQLite CURRENT_TIMESTAMP format: "YYYY-MM-DD HH:MM:SS"
+                    # Convert to ISO format with timezone info
+                    dt = datetime.fromisoformat(timestamp_str)
+                    # Assume SQLite timestamp is UTC and add timezone info
+                    dt_utc = dt.replace(tzinfo=timezone.utc)
+                    formatted_timestamp = dt_utc.isoformat()
+                except Exception as e:
+                    # Fallback: create a current timestamp
+                    print(f"Error parsing timestamp '{timestamp_str}': {e}")
+                    formatted_timestamp = datetime.now(timezone.utc).isoformat()
             else:
-                formatted_timestamp = datetime.now().isoformat()
+                formatted_timestamp = datetime.now(timezone.utc).isoformat()
             
             report = ReportResponse(
                 id=row['id'],

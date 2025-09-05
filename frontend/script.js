@@ -48,7 +48,20 @@ const Utils = {
     // Format timestamp for display
     formatTimestamp: function(timestamp) {
         const date = new Date(timestamp);
-        return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        const now = new Date();
+        const diffInHours = (now - date) / (1000 * 60 * 60);
+        
+        if (diffInHours < 1) {
+            const diffInMinutes = Math.floor((now - date) / (1000 * 60));
+            return diffInMinutes <= 1 ? 'Just now' : `${diffInMinutes} minutes ago`;
+        } else if (diffInHours < 24) {
+            const hours = Math.floor(diffInHours);
+            return hours === 1 ? '1 hour ago' : `${hours} hours ago`;
+        } else if (diffInHours < 48) {
+            return 'Yesterday';
+        } else {
+            return date.toLocaleDateString() + ' at ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
     },
 
     // Format coordinates for display
@@ -73,13 +86,10 @@ const Utils = {
 
 // API configuration - automatically detects environment
 const API_CONFIG = {
-    baseUrl: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-        ? 'http://localhost:8000' 
-        : '', // Use localStorage for Vercel demo
+    baseUrl: 'http://localhost:8000',
     endpoints: {
         reports: '/api/reports'
-    },
-    useLocalStorage: window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+    }
 };
 
 // Report Form Functionality
@@ -1136,13 +1146,31 @@ class ReportsList {
     }
 
     formatTimestamp(timestamp) {
+        // Ensure we're working with a proper Date object
         const date = new Date(timestamp);
         const now = new Date();
-        const diffInHours = (now - date) / (1000 * 60 * 60);
+        
+        // Validate the date
+        if (isNaN(date.getTime())) {
+            return 'Invalid date';
+        }
+        
+        // Calculate difference in milliseconds, then convert to hours
+        const diffInMs = now.getTime() - date.getTime();
+        const diffInHours = diffInMs / (1000 * 60 * 60);
+        
+        // Handle negative differences (future dates)
+        if (diffInHours < 0) {
+            return 'In the future';
+        }
         
         if (diffInHours < 1) {
-            const diffInMinutes = Math.floor((now - date) / (1000 * 60));
-            return diffInMinutes <= 1 ? 'Just now' : `${diffInMinutes} minutes ago`;
+            const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+            if (diffInMinutes <= 1) {
+                return 'Just now';
+            } else {
+                return `${diffInMinutes} minutes ago`;
+            }
         } else if (diffInHours < 24) {
             const hours = Math.floor(diffInHours);
             return hours === 1 ? '1 hour ago' : `${hours} hours ago`;

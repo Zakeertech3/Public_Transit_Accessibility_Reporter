@@ -11,7 +11,7 @@ venv/
 .env
 .DS_Store
 node_modules/
-.vercel
+
 backend/__pycache__/
 backend/reports.db
 *.log
